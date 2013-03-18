@@ -35,7 +35,7 @@ module CloudMade
       options['skip'] = 0 unless options.has_key? 'skip'
       options['bbox_only'] = true unless options.has_key? 'bbox_only'
       options['return_geometry'] = true unless options.has_key? 'return_geometry'
-      request = "/find/#{CGI.escape(query)}.js?#{Service.to_url_params(options)}"
+      request = "/find.js?query=#{CGI.escape(query)}&#{Service.to_url_params(options)}"
       GeoResults.new(JSON.parse(connect request))
     end
 
@@ -61,7 +61,7 @@ module CloudMade
 
     # :nodoc:
     def url_template
-      return "http://#{@subdomain}.#{@connection.url}/#{@connection.api_key}/geocoding"
+      return "http://#{@subdomain}.#{@connection.url}/#{@connection.api_key}/geocoding/v2"
     end
   end
 
